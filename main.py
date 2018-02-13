@@ -6,7 +6,11 @@ def clear():
 
 
 def init_move_history():
-    return [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+    return [
+        [' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' '],  # board in rows
+        [' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' '],  # columns
+        [' ', ' ', ' '], [' ', ' ', ' ']  # diags
+    ]
 
 
 def init_players():
@@ -15,9 +19,9 @@ def init_players():
 
 
 def print_board(moves):
-    print('[%s][%s][%s]' % (moves[0][0], moves[1][0], moves[2][0]))
-    print('[%s][%s][%s]' % (moves[0][1], moves[1][1], moves[2][1]))
-    print('[%s][%s][%s]' % (moves[0][2], moves[1][2], moves[2][2]))
+    print('[%s][%s][%s]' % (moves[0][0], moves[0][1], moves[0][2]))
+    print('[%s][%s][%s]' % (moves[1][0], moves[1][1], moves[1][2]))
+    print('[%s][%s][%s]' % (moves[2][0], moves[2][1], moves[2][2]))
 
 
 def make_a_move(symbol):
@@ -26,39 +30,39 @@ def make_a_move(symbol):
     return {'x': int(x)-1, 'y': int(y)-1, 'symbol': symbol}  #
 
 
+def in_diag1(x, y):
+    return y == x
+
+
+def in_diag2(x, y, dim):
+    return y + x + 1 == dim
+
+
+def add_move(x, y, symbol, moves):
+    print('add move', y, x, symbol)
+    moves[y][x] = symbol
+    return moves
+
+
 def register_move(move):
     global moves
+    dimension = len(moves[0])
+    x = move['x']
+    y = move['y']
+    symbol = move['symbol']
     print('Next move:', move)
-    moves[move['x']][move['y']] = move['symbol']
-
-
-def list_results(moves):
-    dimension = len(moves)
-    columns = []
-    diag1 = []
-    diag2 = []
-    for row in range(0, dimension):
-        print('row', row)
-        column = []
-        for col in range(0, dimension):
-            print('col', col)
-            column.append(moves[col][row])
-        columns.append(column)
-
-        diag1.append(moves[row][row])
-        diag2.append(moves[row][dimension-1-row])
-
-    columns.append(diag1)
-    columns.append(diag2)
-
-    return columns
+    moves = add_move(x, y, symbol, moves)
+    moves = add_move(y, x + dimension, symbol, moves)
+    if in_diag1(x, y):
+        moves = add_move(x, dimension * 2, symbol, moves)
+    if in_diag2(x, y, dimension):
+        moves = add_move(x, dimension * 2 + 1, symbol, moves)
 
 
 def is_ended(moves, game_round):
-    check = moves + list_results(moves)
     # todo check if 'o','o','o' or 'x','x','x' is in it
-    print ('all moves:', check)
-    return game_round > 3
+    print ('all moves:', moves)
+    return game_round > 10
     # print(moves.items())
 
 
@@ -67,7 +71,7 @@ players = init_players()
 game_round = 0
 
 while not is_ended(moves, game_round):
-    clear()
+    # clear()
     print(moves)
     player = players[game_round % 2]
     print('player:', player)
