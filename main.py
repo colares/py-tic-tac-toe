@@ -39,13 +39,12 @@ def in_counter_diagonal(x, y, dim):
     return y + x + 1 == dim
 
 
-def add_move(x, y, symbol, moves):
+def add_move(moves, x, y, symbol):
     moves[y][x] = symbol
     return moves
 
 
-def is_valid(move):
-    global moves
+def is_valid(moves, move):
     dimension = len(moves[0])
     if move['x'] not in range(0, dimension):
         return False
@@ -56,19 +55,18 @@ def is_valid(move):
     return True
 
 
-def register_move(move):
-    global moves
+def register_move(moves, move):
     dimension = len(moves[0])
     x = move['x']
     y = move['y']
     symbol = move['symbol']
-    moves = add_move(x, y, symbol, moves)
-    moves = add_move(y, x + dimension, symbol, moves)
+    moves = add_move(moves, x, y, symbol)
+    moves = add_move(moves, y, x + dimension, symbol)
     if in_main_diagonal(x, y):
-        moves = add_move(x, dimension * 2, symbol, moves)
+        moves = add_move(moves, x, dimension * 2, symbol)
     if in_counter_diagonal(x, y, dimension):
-        moves = add_move(x, dimension * 2 + 1, symbol, moves)
-    return True
+        moves = add_move(moves, x, dimension * 2 + 1, symbol)
+    return moves
 
 
 def win(moves, player):
@@ -96,27 +94,29 @@ def is_ended(moves, players):
     return False
 
 
-moves = init_move_history()
-players = init_players()
-game_round = 0
-invalid_move = False
-while True:
-    clear()
-    print_board(moves)
-    print("Round:", game_round)
-    if is_ended(moves, players):
-        break
-    player = players[game_round % 2]
-    print('Player:', player['symbol'])
-    if invalid_move:
-        invalid_move = False
-        print("Invalid move. Try it again", end="")
-    print(" ")
-    new_move = make_a_move(player['symbol'])
-    if not is_valid(new_move):
-        invalid_move = True
-        continue
-    register_move(new_move)
-    game_round += 1
+def main():
+    moves = init_move_history()
+    players = init_players()
+    game_round = 0
+    invalid_move = False
+    while True:
+        clear()
+        print_board(moves)
+        print("Round:", game_round)
+        if is_ended(moves, players):
+            break
+        player = players[game_round % 2]
+        print('Player:', player['symbol'])
+        if invalid_move:
+            invalid_move = False
+            print("Invalid move. Try it again", end="")
+        print(" ")
+        new_move = make_a_move(player['symbol'])
+        if not is_valid(moves, new_move):
+            invalid_move = True
+            continue
+        moves = register_move(moves, new_move)
+        game_round += 1
 
 
+main()
