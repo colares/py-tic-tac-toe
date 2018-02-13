@@ -42,5 +42,7 @@ I hadn't planned to create this section. But I did, since the use interface is n
 * Example: ```23```. Column ```2```, line ```3```.
 * Press ```Enter``` and let your enemy make a move. This war, my friend.
       
+> **Buckle up and enjoy a marvel experience! :)** -- Thiago Colares
       
- > **Buckle up and enjoy a marvel experience! :)** -- Thiago Colares
+## License
+This project is licensed under the terms of the [GNU General Public License v3.0](https://github.com/colares/py-tic-tac-toe/blob/master/LICENSE "GNU General Public License v3.0")
