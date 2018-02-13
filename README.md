@@ -36,6 +36,6 @@ I hadn't planned to create this section. But I did, since the use interface is n
 * Input a pair of numbers, from 1 to 3 each. 
 * The first number stands for the column. The second, the line.
 * Example: ```23```. Column ```2```, line ```3```.
-* Press ````Enter``` and let your enemy make a move. This war, my friend.
+* Press ```Enter``` and let your enemy make a move. This war, my friend.
       
  **Buckle up and enjoy a marvel experience! :)**
