@@ -43,5 +43,4 @@ I hadn't planned to create this section. But I did, since the use interface is n
 * Press ```Enter``` and let your enemy make a move. This war, my friend.
       
       
-      
- > **Buckle up and enjoy a marvel experience! :)*** -- Thiago Colares*
+ > **Buckle up and enjoy a marvel experience! :)** -- Thiago Colares
