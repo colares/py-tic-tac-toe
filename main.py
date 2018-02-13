@@ -62,7 +62,14 @@ def register_move(move):
 def is_ended(moves, game_round):
     # todo check if 'o','o','o' or 'x','x','x' is in it
     print ('all moves:', moves)
-    return game_round > 10
+    if ['x','x','x'] in moves:
+        print("x ganhou!")
+        return True
+    if ['y', 'y', 'y'] in moves:
+        print("y ganhou!")
+        return True
+    return False
+    # return game_round > 10
     # print(moves.items())
 
 
