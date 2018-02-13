@@ -40,6 +40,7 @@ def in_counter_diagonal(x, y, dim):
 
 
 def add_move(moves, x, y, symbol):
+    moves = list(moves)
     moves[y][x] = symbol
     return moves
 
@@ -56,6 +57,7 @@ def is_valid(moves, move):
 
 
 def register_move(moves, move):
+    moves = list(moves)
     dimension = len(moves[0])
     x = move['x']
     y = move['y']
