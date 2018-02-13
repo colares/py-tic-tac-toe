@@ -26,8 +26,8 @@ def print_board(moves):
 
 
 def make_a_move(symbol):
-    xy = input('Column[1,2,3],Row[1,2,3]: ')
-    x, y = xy.split(',')
+    xy = input('Column[1,2,3]Row[1,2,3]: ')
+    x, y = list(xy)
     return {'x': int(x)-1, 'y': int(y)-1, 'symbol': symbol}  #
 
 
@@ -103,10 +103,14 @@ moves = init_move_history()
 players = init_players()
 game_round = 0
 invalid_move = False
-while not is_ended(moves, players):
-    clear()
+clear()
+while True:
     # print(moves)
+    clear()
     print_board(moves)
+    print("Round:", game_round)
+    if (is_ended(moves, players)):
+        break
     player = players[game_round % 2]
     print('Player:', player['symbol'])
     if invalid_move:
@@ -118,5 +122,8 @@ while not is_ended(moves, players):
         invalid_move = True
         continue
     register_move(new_move)
+
+
     game_round += 1
+
 
