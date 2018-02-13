@@ -1,6 +1,8 @@
 # Simple one-python-file tic-tac-toe
 A command line tic tac toe version for two human-being players.
 
+![Gameplay](py-tic-tac-toe-show-off.png)
+
 ## Who was the game made for?
 For you,
 * tired of playing God of War \m/
@@ -33,9 +35,13 @@ I hadn't planned to create this section. But I did, since the use interface is n
 
 **Consider this as an opportunity to collaborate :)**
 
-* Input a pair of numbers, from 1 to 3 each. 
+![Set a pair: ColumnRow](py-tic-tac-toe-help.png)
+
+* Set a pair of numbers, from 1 to 3 each. 
 * The first number stands for the column. The second, the line.
 * Example: ```23```. Column ```2```, line ```3```.
 * Press ```Enter``` and let your enemy make a move. This war, my friend.
       
- **Buckle up and enjoy a marvel experience! :)**
+      
+      
+ > **Buckle up and enjoy a marvel experience! :)*** -- Thiago Colares*
