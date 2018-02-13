@@ -4,12 +4,11 @@ A command line tic tac toe version for two human-being players.
 ![Gameplay](py-tic-tac-toe-show-off.png)
 
 ## Who was the game made for?
-For you,
-* tired of playing God of War \m/
-* beginner python learner
-* who wants to start collaborating with free software projects
+* For you, tired of playing God of War \m/
+* Beginner python learners
+* Who wants to start collaborating with free software projects
 
-or for myself, who wanted to remember my pytonic skills.
+or for myself, who wanted to remember my pythonic skills.
 
 ## Requirements
 * (Optional) Docker
