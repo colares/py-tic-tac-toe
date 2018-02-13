@@ -19,9 +19,10 @@ def init_players():
 
 
 def print_board(moves):
-    print('[%s][%s][%s]' % (moves[0][0], moves[0][1], moves[0][2]))
-    print('[%s][%s][%s]' % (moves[1][0], moves[1][1], moves[1][2]))
-    print('[%s][%s][%s]' % (moves[2][0], moves[2][1], moves[2][2]))
+    print('   1  2  3')
+    print('1 [%s][%s][%s]' % (moves[0][0], moves[0][1], moves[0][2]))
+    print('2 [%s][%s][%s]' % (moves[1][0], moves[1][1], moves[1][2]))
+    print('3 [%s][%s][%s]' % (moves[2][0], moves[2][1], moves[2][2]))
 
 
 def make_a_move(symbol):
@@ -44,6 +45,18 @@ def add_move(x, y, symbol, moves):
     return moves
 
 
+def is_valid(move):
+    global moves
+    dimension = len(moves[0])
+    if move['x'] not in range(0, dimension):
+        return False
+    if move['y'] not in range(0, dimension):
+        return False
+    if moves[move['y']][move['x']] != ' ':
+        return False
+    return True
+
+
 def register_move(move):
     global moves
     dimension = len(moves[0])
@@ -57,33 +70,54 @@ def register_move(move):
         moves = add_move(x, dimension * 2, symbol, moves)
     if in_diag2(x, y, dimension):
         moves = add_move(x, dimension * 2 + 1, symbol, moves)
+    return True
 
 
-def is_ended(moves, game_round):
-    # todo check if 'o','o','o' or 'x','x','x' is in it
-    print ('all moves:', moves)
-    if ['x','x','x'] in moves:
-        print("x ganhou!")
+def win(moves, player):
+    if [player['symbol']]*len(moves[0]) in moves:
         return True
-    if ['y', 'y', 'y'] in moves:
-        print("y ganhou!")
+
+
+def tie(moves):
+    none = 0
+    for l in moves:
+        none += l.count(' ')
+    return none == 0
+
+
+def is_ended(moves, players):
+    print ('all moves:', moves)
+    if win(moves, players[0]):
+        print(players[0]['symbol'], 'ganhou!')
+        return True
+    if win(moves, players[1]):
+        print(players[1]['symbol'], 'ganhou!')
+        return True
+    if tie(moves):
+        print('empate!')
         return True
     return False
-    # return game_round > 10
-    # print(moves.items())
+
 
 
 moves = init_move_history()
 players = init_players()
 game_round = 0
-
-while not is_ended(moves, game_round):
+invalid_move = False
+while not is_ended(moves, players):
     # clear()
     print(moves)
+    if invalid_move:
+        invalid_move = False
+        print("Invalid move. Try it again")
     player = players[game_round % 2]
     print('player:', player)
     print_board(moves)
-    register_move(make_a_move(player['symbol']))
+    new_move = make_a_move(player['symbol'])
+    if not is_valid(new_move):
+        invalid_move = True
+        continue
+    register_move(new_move)
     game_round += 1
 
 # clear()
