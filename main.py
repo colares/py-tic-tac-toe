@@ -26,8 +26,8 @@ def print_board(moves):
 
 
 def make_a_move(symbol):
-    x = input('Column (1,2,3):')
-    y = input('Row (1,2,3):')
+    xy = input('Column[1,2,3],Row[1,2,3]: ')
+    x, y = xy.split(',')
     return {'x': int(x)-1, 'y': int(y)-1, 'symbol': symbol}  #
 
 
@@ -40,7 +40,7 @@ def in_diag2(x, y, dim):
 
 
 def add_move(x, y, symbol, moves):
-    print('add move', y, x, symbol)
+    # print('add move', y, x, symbol)
     moves[y][x] = symbol
     return moves
 
@@ -63,7 +63,7 @@ def register_move(move):
     x = move['x']
     y = move['y']
     symbol = move['symbol']
-    print('Next move:', move)
+    # print('Next move:', move)
     moves = add_move(x, y, symbol, moves)
     moves = add_move(y, x + dimension, symbol, moves)
     if in_diag1(x, y):
@@ -86,15 +86,14 @@ def tie(moves):
 
 
 def is_ended(moves, players):
-    print ('all moves:', moves)
     if win(moves, players[0]):
-        print(players[0]['symbol'], 'ganhou!')
+        print(players[0]['symbol'], 'wins!')
         return True
     if win(moves, players[1]):
-        print(players[1]['symbol'], 'ganhou!')
+        print(players[1]['symbol'], 'wins!')
         return True
     if tie(moves):
-        print('empate!')
+        print('tie!')
         return True
     return False
 
@@ -105,29 +104,19 @@ players = init_players()
 game_round = 0
 invalid_move = False
 while not is_ended(moves, players):
-    # clear()
-    print(moves)
+    clear()
+    # print(moves)
+    print_board(moves)
+    player = players[game_round % 2]
+    print('Player:', player['symbol'])
     if invalid_move:
         invalid_move = False
-        print("Invalid move. Try it again")
-    player = players[game_round % 2]
-    print('player:', player)
-    print_board(moves)
+        print("Invalid move. Try it again", end="")
+    print(" ")
     new_move = make_a_move(player['symbol'])
     if not is_valid(new_move):
         invalid_move = True
         continue
     register_move(new_move)
     game_round += 1
-
-# clear()
-# print(moves)
-# print_board()
-# add_move(make_a_move('x'))
-#
-# clear()
-# print(moves)
-# print_board()
-# add_move(make_a_move('x'))
-
 
