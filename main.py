@@ -31,16 +31,15 @@ def make_a_move(symbol):
     return {'x': int(x)-1, 'y': int(y)-1, 'symbol': symbol}  #
 
 
-def in_diag1(x, y):
+def in_main_diagonal(x, y):
     return y == x
 
 
-def in_diag2(x, y, dim):
+def in_counter_diagonal(x, y, dim):
     return y + x + 1 == dim
 
 
 def add_move(x, y, symbol, moves):
-    # print('add move', y, x, symbol)
     moves[y][x] = symbol
     return moves
 
@@ -63,12 +62,11 @@ def register_move(move):
     x = move['x']
     y = move['y']
     symbol = move['symbol']
-    # print('Next move:', move)
     moves = add_move(x, y, symbol, moves)
     moves = add_move(y, x + dimension, symbol, moves)
-    if in_diag1(x, y):
+    if in_main_diagonal(x, y):
         moves = add_move(x, dimension * 2, symbol, moves)
-    if in_diag2(x, y, dimension):
+    if in_counter_diagonal(x, y, dimension):
         moves = add_move(x, dimension * 2 + 1, symbol, moves)
     return True
 
@@ -102,13 +100,11 @@ moves = init_move_history()
 players = init_players()
 game_round = 0
 invalid_move = False
-clear()
 while True:
-    # print(moves)
     clear()
     print_board(moves)
     print("Round:", game_round)
-    if (is_ended(moves, players)):
+    if is_ended(moves, players):
         break
     player = players[game_round % 2]
     print('Player:', player['symbol'])
@@ -121,8 +117,6 @@ while True:
         invalid_move = True
         continue
     register_move(new_move)
-
-
     game_round += 1
 
 
