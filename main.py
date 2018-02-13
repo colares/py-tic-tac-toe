@@ -26,8 +26,8 @@ def print_board(moves):
 
 
 def make_a_move(symbol):
-    xy = input('Column[1,2,3]Row[1,2,3]: ')
-    x, y = list(xy)
+    xy = input('ColumnRow (ex.: 23): ')
+    x, y = list(xy.ljust(2, '0')[:2])
     return {'x': int(x)-1, 'y': int(y)-1, 'symbol': symbol}  #
 
 
@@ -96,7 +96,6 @@ def is_ended(moves, players):
         print('tie!')
         return True
     return False
-
 
 
 moves = init_move_history()
