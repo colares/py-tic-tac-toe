@@ -31,7 +31,7 @@ or for myself, who wanted to remember my pytonic skills.
       python main.py
       
 ## How to play it
-I hadn't planned to create this section. But I did, since the use interface is not THAT amazing.
+I hadn't planned to create this section. But I did, since the user interface is not THAT amazing.
 
 **Consider this as an opportunity to collaborate :)**
 
